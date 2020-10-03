@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PropulsionActivity">
+
+    <ImageView
+        android:id="@+id/imageView_propulsion_back"
+        android:clickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:contentDescription="@string/propulsion_back_descriptor" />
+
+    <TextView
+        android:id="@+id/textview_propulsion_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_propulsion_details"
+        android:text="@string/propulsion_button_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textview_propulsion_title"
+        app:layout_constraintCircle="@id/textview_propulsion_title"
+        app:layout_constraintCircleAngle="0"
+        app:layout_constraintCircleRadius="120dp"
+        app:layout_constraintStart_toStartOf="@+id/textview_propulsion_title" />
+
+    <Button
+        android:id="@+id/button_propulsion_journey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/propulsion_button_journey"
+        app:layout_constraintBottom_toTopOf="@+id/textview_propulsion_title"
+        app:layout_constraintCircle="@id/textview_propulsion_title"
+        app:layout_constraintCircleAngle="86"
+        app:layout_constraintCircleRadius="120dp"
+        app:layout_constraintStart_toEndOf="@+id/textview_propulsion_title" />
+
+    <Button
+        android:id="@+id/button_propulsion_popculture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/propulsion_button_popculture"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_propulsion_title"
+        app:layout_constraintCircle="@id/textview_propulsion_title"
+        app:layout_constraintCircleAngle="144"
+        app:layout_constraintCircleRadius="120dp"
+        app:layout_constraintStart_toEndOf="@+id/textview_propulsion_title" />
+
+    <Button
+        android:id="@+id/button_propulsion_accelerometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/propulsion_button_accelerometer"
+        app:layout_constraintCircle="@id/textview_propulsion_title"
+        app:layout_constraintCircleAngle="216"
+        app:layout_constraintCircleRadius="120dp"
+        app:layout_constraintStart_toStartOf="@+id/textview_propulsion_title"
+        app:layout_constraintTop_toBottomOf="@+id/textview_propulsion_title" />
+
+    <Button
+        android:id="@+id/button_propulsion_discoveries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/propulsion_button_discoveries"
+        app:layout_constraintCircle="@id/textview_propulsion_title"
+        app:layout_constraintCircleAngle="274"
+        app:layout_constraintCircleRadius="120dp"
+        app:layout_constraintEnd_toStartOf="@+id/textview_propulsion_title"
+        app:layout_constraintTop_toTopOf="@+id/textview_propulsion_title" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

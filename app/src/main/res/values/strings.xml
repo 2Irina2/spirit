@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">SPIRIT</string>
+
+    <string name="button_begin">begin</string>
+
+    <string name="button_skip">skip</string>
+    <string name="dialog_skip_title">Skip intro?</string>
+    <string name="dialog_skip_message">You can rewatch anytime via the settings page.</string>
+    <string name="dialog_skip_yes">Skip</string>
+    <string name="dialog_skip_no">Keep watching</string>
+
+    <string name="app_logo_descriptor">SPIRIT application logo</string>
+    <string name="settings_icon_descriptor">Settings icon</string>
+
+    <string name="list_item_image">Image for the list item</string>
+    <string name="list_item_gradient">Gradient</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_play_intro">Continue watching intro</string>
+    <string name="settings_dialog_play_intro_title">Continue playing intro?</string>
+    <string name="settings_dialog_play_intro_content">You will be redirected to the intro screen.</string>
+    <string name="settings_dialog_yes">Continue</string>
+    <string name="settings_dialog_no">Cancel</string>
+    <string name="settings_credits_title">Credits</string>
+    <string name="settings_credits_content">Exoplanet data: https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html \n\n Other source: blah blah blah</string>
+
+    <string name="propulsion_back_descriptor">Back icon</string>
+    <string name="propulsion_button_details">Details</string>
+    <string name="propulsion_button_journey">Journey</string>
+    <string name="propulsion_button_popculture">Pop culture</string>
+    <string name="propulsion_button_accelerometer">Speeds</string>
+    <string name="propulsion_button_discoveries">Discoveries</string>
+
+
+</resources>

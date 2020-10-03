@@ -1,0 +1,37 @@
+{
+  "propulsion_objects": [
+    {
+      "name": "propulsion 1",
+      "average_velocity": 7,
+      "inventor": "...,",
+      "year": 1800,
+      "energy_source": "solid fuel",
+      "description": "short description",
+      "theoretical": true,
+      "achevements": "...",
+      "picture": "URL"
+    },
+    {
+      "name": "propulsion 2",
+      "average_velocity": 10,
+      "inventor": "...,",
+      "year": 1800,
+      "energy_source": "electric",
+      "description": "short description",
+      "theoretical": false,
+      "achevements": "...",
+      "picture": "URL"
+    },
+    {
+      "name": "propulsion 3",
+      "average_velocity": 100,
+      "inventor": "...,",
+      "year": 1800,
+      "energy_source": "nuclear",
+      "description": "short description",
+      "theoretical": true,
+      "achevements": "...",
+      "picture": "URL"
+    }
+  ]
+}

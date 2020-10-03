@@ -1,0 +1,42 @@
+{
+  "popart_objects": [
+    {
+      "propulsion_type": "nuclear",
+      "occurrences": [
+        {
+          "name": "Name of the tv show",
+          "type": "TV show",
+          "year_released": 1900,
+          "synopsis": "..",
+          "picture": "URL"
+        },
+        {
+          "name": "Name of book",
+          "type": "Book",
+          "year_released": 1700,
+          "synopsis": "..",
+          "picture": "URL"
+        }
+      ]
+    },
+    {
+      "propulsion_type": "electric",
+      "occurrences": [
+        {
+          "name": "Name of the tv show",
+          "type": "TV show",
+          "year_released": 1900,
+          "synopsis": "..",
+          "picture": "URL"
+        },
+        {
+          "name": "Name of book",
+          "type": "Book",
+          "year_released": 1700,
+          "synopsis": "..",
+          "picture": "URL"
+        }
+      ]
+    }
+  ]
+}
