@@ -14,6 +14,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.spirit.MainActivity;
 import com.example.spirit.R;
+import com.example.spirit.TravelActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,7 +30,6 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         final Integer[] timeRemaining = {intent.getIntExtra("TimeValue", 0)};
         final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -51,11 +51,12 @@ public class NotificationService extends Service {
 
     public void NotificationUpdate(Integer timeLeft){
         try {
-            Intent notificationIntent = new Intent(this, MainActivity.class);
-            final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-            final Notification[] notification = {new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setContentTitle("My Stop Watch")
-                    .setContentText("Time Remaing : " + timeLeft.toString())
+            Intent notificationIntent = new Intent(this, TravelActivity.class);
+            notificationIntent.putExtra("notif", true);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+            Notification[] notification = {new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setContentTitle(getResources().getString(R.string.travel_notification_title) + "PLANET NAME")
+                    .setContentText(getResources().getString(R.string.travel_notification_content))
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentIntent(pendingIntent)
                     .build()};
