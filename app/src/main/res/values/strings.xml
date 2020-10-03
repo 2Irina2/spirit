@@ -22,7 +22,7 @@
     <string name="settings_dialog_yes">Continue</string>
     <string name="settings_dialog_no">Cancel</string>
     <string name="settings_credits_title">Credits</string>
-    <string name="settings_credits_content">Exoplanet data: https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html \n\n Other source: blah blah blah</string>
+    <string name="settings_credits_content">Exoplanet data: https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html \n\n Planet 3D model: At https://poly.google.com/view/9OPocAqXM0u by Google licensed under CC-BY \n\n Space-time warp gif: https://thumbs.gfycat.com/DigitalUnfinishedCatfish-size_restricted.gif</string>
 
     <string name="propulsion_back_descriptor">Back icon</string>
     <string name="propulsion_button_details">Details</string>
@@ -30,6 +30,19 @@
     <string name="propulsion_button_popculture">Pop culture</string>
     <string name="propulsion_button_accelerometer">Speeds</string>
     <string name="propulsion_button_discoveries">Discoveries</string>
+
+    <string name="journey_dialog_title">Confirm journey</string>
+    <string name="journey_dialog_propulsion_type_label">Propulsion type: </string>
+    <string name="journey_dialog_destination_label">Destination: </string>
+    <string name="journey_dialog_length_label">Travelling distance</string>
+    <string name="journey_dialog_real_time_label">Approximate realistic travel time: </string>
+    <string name="journey_dialog_app_time_label">Approximate app travel time: </string>
+    <string name="journey_dialog_toast">You will be notified when you enter the destination planet\'s orbit</string>
+    <string name="journey_dialog_no">Pick another planet</string>
+    <string name="journey_dialog_yes">Let\'s go!</string>
+
+    <string name="travel_gif_descriptior">Space-time warp animation</string>
+    <string name="travel_notification_content">You have reached your destination</string>
 
 
 </resources>

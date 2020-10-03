@@ -31,19 +31,11 @@ public class IntroActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(IntroActivity.this);
                 builder.setMessage(R.string.dialog_skip_message)
                         .setTitle(R.string.dialog_skip_title)
-                        .setPositiveButton(R.string.dialog_skip_yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(IntroActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                            }
+                        .setPositiveButton(R.string.dialog_skip_yes, (dialog, which) -> {
+                            Intent intent = new Intent(IntroActivity.this, HomeActivity.class);
+                            startActivity(intent);
                         })
-                        .setNegativeButton(R.string.dialog_skip_no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
+                        .setNegativeButton(R.string.dialog_skip_no, (dialog, which) -> dialog.dismiss());
                 builder.create().show();
             }
         });

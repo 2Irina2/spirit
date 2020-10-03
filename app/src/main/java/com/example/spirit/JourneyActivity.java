@@ -1,8 +1,12 @@
 package com.example.spirit;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +66,7 @@ public class JourneyActivity extends AppCompatActivity {
         if (frame.getCamera().getTrackingState() == TrackingState.TRACKING && arFragment.getArSceneView().getSession().getAllAnchors().isEmpty()) {
             if (!observed) {
                 planetViewModel.getPlanets().observe(this, planetList -> {
-                    for(Planet planet:planetList){
+                    for (Planet planet : planetList) {
                         Cartesians cartesians = Utils.equatorialToCartesians(planet.getRightAscension(), planet.getDeclination(), planet.getDistance());
                         addObject(Uri.parse("1226 Moon.sfb"), cartesians);
                     }
@@ -78,7 +82,7 @@ public class JourneyActivity extends AppCompatActivity {
         Frame frame = arFragment.getArSceneView().getArFrame();
         Session session = arFragment.getArSceneView().getSession();
         Anchor anchor = session.createAnchor(frame.getCamera().getPose()
-                .compose(Pose.makeTranslation((float) coords.getX(), (float )coords.getY(), (float) coords.getZ())).extractTranslation());
+                .compose(Pose.makeTranslation((float) coords.getX(), (float) coords.getY(), (float) coords.getZ())).extractTranslation());
         modelLoader.loadModel(anchor, model);
     }
 
@@ -88,7 +92,7 @@ public class JourneyActivity extends AppCompatActivity {
         node.setRenderable(renderable);
         node.setParent(anchorNode);
         arFragment.getArSceneView().getScene().addChild(anchorNode);
-        node.setOnTapListener((hitTestResult, motionEvent) -> Toast.makeText(JourneyActivity.this, "Node clicked", Toast.LENGTH_SHORT).show());
+        node.setOnTapListener((hitTestResult, motionEvent) -> displayJourneyDetails());
         node.select();
     }
 
@@ -98,5 +102,31 @@ public class JourneyActivity extends AppCompatActivity {
                 .setTitle("Error loading model!");
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void displayJourneyDetails() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(JourneyActivity.this);
+        builder.setTitle(R.string.journey_dialog_title)
+                .setView(R.layout.journey_dialog)
+                .setPositiveButton(R.string.journey_dialog_yes, (dialog, which) -> {
+                    Intent intent = new Intent(JourneyActivity.this, TravelActivity.class);
+                    Toast.makeText(JourneyActivity.this, R.string.journey_dialog_toast, Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                })
+                .setNegativeButton(R.string.journey_dialog_no, (dialog, which) -> dialog.dismiss());
+
+        Dialog dialog = builder.create();
+        dialog.show();
+
+        TextView propulsionType = dialog.findViewById(R.id.textview_journey_dialog_propulsion_type);
+        propulsionType.setText("X");
+        TextView destination = dialog.findViewById(R.id.textview_journey_dialog_destination);
+        destination.setText("Planet x");
+        TextView length = dialog.findViewById(R.id.textview_journey_dialog_length);
+        length.setText("1000 kms");
+        TextView realTime = dialog.findViewById(R.id.textview_journey_dialog_real_time);
+        realTime.setText("A really long long time");
+        TextView appTime = dialog.findViewById(R.id.textview_journey_dialog_app_time);
+        appTime.setText("Shorter time");
     }
 }
