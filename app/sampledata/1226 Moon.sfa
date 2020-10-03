@@ -37,7 +37,7 @@
     file: 'sampledata/1226 Moon.obj',
     name: '1226 Moon',
     recenter: 'root',
-    scale: 0.013519,
+    scale: 0.001
   },
   samplers: [
     {

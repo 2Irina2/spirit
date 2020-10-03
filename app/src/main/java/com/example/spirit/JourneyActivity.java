@@ -62,9 +62,10 @@ public class JourneyActivity extends AppCompatActivity {
         if (frame.getCamera().getTrackingState() == TrackingState.TRACKING && arFragment.getArSceneView().getSession().getAllAnchors().isEmpty()) {
             if (!observed) {
                 planetViewModel.getPlanets().observe(this, planetList -> {
-                    Planet planet = planetList.get(0);
-                    Cartesians cartesians = Utils.equatorialToCartesians(planet.getRightAscension(), planet.getDeclination(), planet.getDistance());
-                    addObject(Uri.parse("1226 Moon.sfb"), cartesians);
+                    for(Planet planet:planetList){
+                        Cartesians cartesians = Utils.equatorialToCartesians(planet.getRightAscension(), planet.getDeclination(), planet.getDistance());
+                        addObject(Uri.parse("1226 Moon.sfb"), cartesians);
+                    }
                 });
 
                 observed = true;
