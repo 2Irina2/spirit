@@ -22,7 +22,7 @@
     <string name="settings_dialog_yes">Continue</string>
     <string name="settings_dialog_no">Cancel</string>
     <string name="settings_credits_title">Credits</string>
-    <string name="settings_credits_content">Exoplanet data: https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html \n\n Planet 3D model: At https://poly.google.com/view/9OPocAqXM0u by Google licensed under CC-BY \n\n Space-time warp gif: https://thumbs.gfycat.com/DigitalUnfinishedCatfish-size_restricted.gif</string>
+    <string name="settings_credits_content">Exoplanet data: https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html \n\n Planet 3D model: At https://poly.google.com/view/9OPocAqXM0u by Google licensed under CC-BY \n\n Space-time warp gif: https://thumbs.gfycat.com/DigitalUnfinishedCatfish-size_restricted.gif \n\n SPIRIT logo font: https://www.dafont.com/viking.font</string>
 
     <string name="propulsion_back_descriptor">Back icon</string>
     <string name="propulsion_button_details">Details</string>
@@ -50,6 +50,14 @@
     <string name="travel_dialog_time_label">Time taken: </string>
     <string name="travel_dialog_no">New propulsion type</string>
     <string name="travel_dialog_yes">New journey</string>
+
+    <string name="details_image_descriptor">Propulsion type image descriptor</string>
+    <string name="details_status_label">Status: </string>
+    <string name="details_max_velocity_label">Max. velocity: </string>
+    <string name="details_exhaust_velocity_label">Exhaust velocity: </string>
+    <string name="details_highlight_label">Highlight: </string>
+    <string name="details_risk_label">Risk: </string>
+    <string name="details_description_label">Description: </string>
 
 
 </resources>
