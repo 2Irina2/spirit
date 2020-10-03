@@ -38,7 +38,14 @@ public class PropulsionActivity extends AppCompatActivity {
 
 
     private void setUpDetailsButton(){
-
+        Button detailsButton = findViewById(R.id.button_propulsion_details);
+        detailsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PropulsionActivity.this, DetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpJourneyButton(){
