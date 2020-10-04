@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.spirit.objects.PopCulture;
 import com.example.spirit.objects.Propulsion;
 
 public class PropulsionActivity extends AppCompatActivity {
@@ -67,6 +68,13 @@ public class PropulsionActivity extends AppCompatActivity {
     }
 
     private void setUpPopButton(){
-
+        Button popArtButton = findViewById(R.id.button_propulsion_popculture);
+        popArtButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PropulsionActivity.this, PopCultureActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
