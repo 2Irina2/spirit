@@ -75,7 +75,7 @@ public class NotificationService extends Service {
             Intent notificationIntent = new Intent(this, TravelActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
             Notification[] notification = {new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setContentTitle(getResources().getString(R.string.travel_notification_title) + "PLANET NAME")
+                    .setContentTitle(getResources().getString(R.string.travel_notification_title) )
                     .setContentText(getResources().getString(R.string.travel_notification_content))
                     .setSmallIcon(R.drawable.app_icon_color)
                     .setContentIntent(pendingIntent)

@@ -156,7 +156,6 @@ public class JourneyActivity extends AppCompatActivity {
         double speed = propulsion.getTravelVelocity();
 
         double timeSeconds = distanceKm/speed;
-        Toast.makeText(this, String.valueOf(timeSeconds), Toast.LENGTH_LONG).show();
         return Math.round(timeSeconds);
     }
 

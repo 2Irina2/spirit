@@ -42,7 +42,7 @@
     <string name="journey_dialog_yes">Let\'s go!</string>
 
     <string name="travel_gif_descriptior">Space-time warp animation</string>
-    <string name="travel_notification_title">You have reached</string>
+    <string name="travel_notification_title">You have reached your destination!</string>
     <string name="travel_notification_content">What happens now?</string>
     <string name="travel_dialog_exoplanet_label">Exoplanet: </string>
     <string name="travel_dialog_year_label">Year of discovery: </string>
