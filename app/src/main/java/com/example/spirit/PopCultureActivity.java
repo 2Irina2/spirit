@@ -20,7 +20,7 @@ public class PopCultureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_culture);
-        
+
         showNameView = findViewById(R.id.textview_popculture_name);
         yearView = findViewById(R.id.textview_popculture_year);
         imageView = findViewById(R.id.imageview_popculture_image);
