@@ -17,7 +17,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.spirit.objects.Cartesians;
 import com.example.spirit.objects.Planet;
+import com.example.spirit.objects.PlanetNode;
 import com.example.spirit.objects.PlanetViewModel;
+import com.example.spirit.objects.Propulsion;
 import com.example.spirit.utils.ModelLoader;
 import com.example.spirit.utils.Utils;
 import com.google.ar.core.Anchor;
@@ -32,6 +34,7 @@ import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.lang.ref.WeakReference;
+import java.util.Date;
 
 public class JourneyActivity extends AppCompatActivity {
 
@@ -39,6 +42,7 @@ public class JourneyActivity extends AppCompatActivity {
     private PlanetViewModel planetViewModel;
     private ModelLoader modelLoader;
     private boolean observed = false;
+    private Propulsion propulsion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,9 @@ public class JourneyActivity extends AppCompatActivity {
         arFragment.getArSceneView().getPlaneRenderer().setVisible(false);
 
         planetViewModel = ViewModelProviders.of(this).get(PlanetViewModel.class);
+
+        Intent intent = getIntent();
+        propulsion = (Propulsion) intent.getSerializableExtra("propulsion");
     }
 
 
@@ -67,8 +74,7 @@ public class JourneyActivity extends AppCompatActivity {
             if (!observed) {
                 planetViewModel.getPlanets().observe(this, planetList -> {
                     for (Planet planet : planetList) {
-                        Cartesians cartesians = Utils.equatorialToCartesians(planet.getRightAscension(), planet.getDeclination(), planet.getDistance());
-                        addObject(Uri.parse("1226 Moon.sfb"), cartesians);
+                        addObject(Uri.parse("1226 Moon.sfb"), planet);
                     }
                 });
 
@@ -78,21 +84,22 @@ public class JourneyActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void addObject(Uri model, Cartesians coords) {
+    private void addObject(Uri model, Planet planet) {
         Frame frame = arFragment.getArSceneView().getArFrame();
         Session session = arFragment.getArSceneView().getSession();
+        Cartesians coords = Utils.equatorialToCartesians(planet.getRightAscension(), planet.getDeclination(), planet.getDistance());
         Anchor anchor = session.createAnchor(frame.getCamera().getPose()
                 .compose(Pose.makeTranslation((float) coords.getX(), (float) coords.getY(), (float) coords.getZ())).extractTranslation());
-        modelLoader.loadModel(anchor, model);
+        modelLoader.loadModel(anchor, model, planet);
     }
 
-    public void addNodeToScene(Anchor anchor, ModelRenderable renderable) {
+    public void addNodeToScene(Anchor anchor, ModelRenderable renderable, Planet planet) {
         AnchorNode anchorNode = new AnchorNode(anchor);
-        TransformableNode node = new TransformableNode(arFragment.getTransformationSystem());
+        PlanetNode node = new PlanetNode(arFragment.getTransformationSystem(), planet);
         node.setRenderable(renderable);
         node.setParent(anchorNode);
         arFragment.getArSceneView().getScene().addChild(anchorNode);
-        node.setOnTapListener((hitTestResult, motionEvent) -> displayJourneyDetails());
+        node.setOnTapListener((hitTestResult, motionEvent) -> displayJourneyDetails(node));
         node.select();
     }
 
@@ -104,7 +111,8 @@ public class JourneyActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void displayJourneyDetails() {
+    public void displayJourneyDetails(PlanetNode node) {
+        Planet planet = node.getPlanet();
         AlertDialog.Builder builder = new AlertDialog.Builder(JourneyActivity.this);
         builder.setTitle(R.string.journey_dialog_title)
                 .setView(R.layout.journey_dialog)
@@ -119,14 +127,44 @@ public class JourneyActivity extends AppCompatActivity {
         dialog.show();
 
         TextView propulsionType = dialog.findViewById(R.id.textview_journey_dialog_propulsion_type);
-        propulsionType.setText("X");
+        propulsionType.setText(propulsion.getName());
         TextView destination = dialog.findViewById(R.id.textview_journey_dialog_destination);
-        destination.setText("Planet x");
+        destination.setText(planet.getName());
         TextView length = dialog.findViewById(R.id.textview_journey_dialog_length);
-        length.setText("1000 kms");
+        length.setText(planet.getDistance() + " parsecs");
         TextView realTime = dialog.findViewById(R.id.textview_journey_dialog_real_time);
-        realTime.setText("A really long long time");
+        long totalSecs = calculateRealTravelTime(planet);
+        realTime.setText(convertSecondsToDays(totalSecs));
         TextView appTime = dialog.findViewById(R.id.textview_journey_dialog_app_time);
-        appTime.setText("Shorter time");
+        long appTravelTime = calculateAppTravelTime(totalSecs);
+        appTime.setText(String.valueOf(appTravelTime) + " seconds");
+    }
+
+    private long calculateRealTravelTime(Planet planet){
+        float distancePc = planet.getDistance();
+        double distanceKm = Utils.round(distancePc * 3.086E13);
+        double speed = propulsion.getTravelVelocity();
+
+        double timeSeconds = distanceKm/speed;
+        Toast.makeText(this, String.valueOf(timeSeconds), Toast.LENGTH_LONG).show();
+        return Math.round(timeSeconds);
+    }
+
+    private long calculateAppTravelTime(long secs){
+        double constant = Math.pow(10, 10);
+        double appSecs = secs/constant;
+
+        if(appSecs < 1){
+            appSecs*=20;
+        }
+
+        return (long)appSecs;
+
+    }
+
+    private String convertSecondsToDays(long totalSecs){
+        Date d = new Date(totalSecs);
+
+        return String.format("%d years, %d months, %d days, %02d hours, %02d minutes, %02d seconds", d.getYear(), d.getMonth(), d.getDay(), d.getHours(), d.getMinutes(), d.getSeconds());
     }
 }

@@ -17,17 +17,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".PopCultureActivity"></activity>
+        <activity
+            android:name=".DetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".utils.NotificationService" />
 
         <activity
             android:name=".TravelActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".JourneyActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PropulsionActivity"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.example.spirit.JourneyActivity;
+import com.example.spirit.objects.Planet;
 import com.google.ar.core.Anchor;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 
@@ -21,7 +22,7 @@ public class ModelLoader {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void loadModel(Anchor anchor, Uri uri) {
+    public void loadModel(Anchor anchor, Uri uri, Planet planet) {
         if (owner.get() == null) {
             Log.d(TAG, "Activity is null.  Cannot load model.");
             return;
@@ -36,7 +37,7 @@ public class ModelLoader {
                     } else if (throwable != null) {
                         fragment.onException(throwable);
                     } else {
-                        fragment.addNodeToScene(anchor, renderable);
+                        fragment.addNodeToScene(anchor, renderable, planet);
                     }
                     return null;
                 });

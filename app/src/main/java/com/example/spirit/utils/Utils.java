@@ -45,7 +45,7 @@ public class Utils {
         return new Cartesians(round(x), round(y), round(z));
     }
 
-    private static double round(double input){
+    public static double round(double input){
         return Math.round(input * 100.0) / 100.0;
     }
 
