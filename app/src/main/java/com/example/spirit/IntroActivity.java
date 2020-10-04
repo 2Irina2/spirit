@@ -1,5 +1,6 @@
 package com.example.spirit;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ public class IntroActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(IntroActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(IntroActivity.this, R.style.AlertDialog);
                 builder.setMessage(R.string.dialog_skip_message)
                         .setTitle(R.string.dialog_skip_title)
                         .setPositiveButton(R.string.dialog_skip_yes, (dialog, which) -> {
@@ -36,7 +37,8 @@ public class IntroActivity extends AppCompatActivity {
                             startActivity(intent);
                         })
                         .setNegativeButton(R.string.dialog_skip_no, (dialog, which) -> dialog.dismiss());
-                builder.create().show();
+                Dialog dialog = builder.create();
+                dialog.show();
             }
         });
     }

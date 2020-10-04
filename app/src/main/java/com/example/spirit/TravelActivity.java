@@ -49,6 +49,11 @@ public class TravelActivity extends AppCompatActivity {
             }
             if (integerTime == 0) {
                 DONE = true;
+                propulsion = (Propulsion) intent.getSerializableExtra("propulsion");
+                planetName = intent.getStringExtra("planet_name");
+                planetYear = intent.getIntExtra("planet_year", -1);
+                distanceKm = intent.getDoubleExtra("distance", -1);
+                travelTime = intent.getLongExtra("travel_time", -1);
                 displayAlertDialog();
             }
         }
@@ -94,8 +99,8 @@ public class TravelActivity extends AppCompatActivity {
     }
 
     private void displayAlertDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(TravelActivity.this);
-        builder.setTitle("Your " + propulsion.getName() + "spacecraft has arrived at: ")
+        AlertDialog.Builder builder = new AlertDialog.Builder(TravelActivity.this, R.style.AlertDialog);
+        builder.setTitle("Your " + propulsion.getName() + " spacecraft has arrived at: ")
                 .setView(R.layout.travel_dialog)
                 .setPositiveButton(R.string.travel_dialog_yes, (dialog, which) -> {
                     Intent intent = new Intent(TravelActivity.this, JourneyActivity.class);
@@ -128,6 +133,12 @@ public class TravelActivity extends AppCompatActivity {
         intentService = new Intent(this, NotificationService.class);
         Long integerTimeSet = seconds;
         intentService.putExtra("TimeValue", integerTimeSet);
+
+        intentService.putExtra("propulsion", propulsion);
+        intentService.putExtra("planet_name", planetName);
+        intentService.putExtra("planet_year", planetYear);
+        intentService.putExtra("distance", distanceKm);
+        intentService.putExtra("travel_time", travelTime);
         startService(intentService);
     }
 

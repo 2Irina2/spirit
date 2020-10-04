@@ -13,6 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/travel_dialog_exoplanet_label" />
 
         <TextView
@@ -33,6 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/travel_dialog_year_label" />
 
         <TextView
@@ -52,6 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/travel_dialog_distance_label" />
 
         <TextView
@@ -71,6 +74,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/travel_dialog_time_label" />
 
         <TextView

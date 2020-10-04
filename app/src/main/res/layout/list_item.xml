@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/imageview_listitem"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         android:contentDescription="@string/list_item_image"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"
@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:textSize="20sp"
         android:gravity="center"
-        android:textColor="@android:color/white"
+        android:textColor="#95bfdf"
         app:layout_constraintBottom_toBottomOf="@+id/imageview_listitem"
         app:layout_constraintStart_toStartOf="@+id/imageview_listitem" />
 </androidx.constraintlayout.widget.ConstraintLayout>

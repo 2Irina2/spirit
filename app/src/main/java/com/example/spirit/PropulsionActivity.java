@@ -25,6 +25,7 @@ public class PropulsionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         propulsion = (Propulsion) intent.getSerializableExtra("propulsion");
         TextView propulsionTextView = findViewById(R.id.textview_propulsion_title);
+
         propulsionTextView.setText(propulsion.getName());
 
         setUpDetailsButton();

@@ -120,7 +120,7 @@ public class JourneyActivity extends AppCompatActivity {
         totalSecs = calculateRealTravelTime(planet);
         appTravelTime = calculateAppTravelTime(totalSecs);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(JourneyActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(JourneyActivity.this, R.style.AlertDialog);
         builder.setTitle(R.string.journey_dialog_title)
                 .setView(R.layout.journey_dialog)
                 .setPositiveButton(R.string.journey_dialog_yes, (dialog, which) -> {

@@ -13,4 +13,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">#27aef3</item>
+        <item name="android:textColorPrimary">#95bfdf</item>
+        <item name="android:colorAccent">#4de3fb</item>
+        <item name="android:background">#44424d</item>
+    </style>
+
 </resources>

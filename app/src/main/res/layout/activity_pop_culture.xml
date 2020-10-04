@@ -4,36 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="#041a34"
     tools:context=".PopCultureActivity">
 
     <TextView
         android:id="@+id/textview_popculture_name"
-        android:text="SpaceX news"
+        android:text="SpaceX News"
         android:layout_width="wrap_content"
+        android:textColor="#95bfdf"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:textSize="36sp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="8dp"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/textview_popculture_year"
         android:text="2018"
+        android:textColor="#95bfdf"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textview_popculture_spacecraft_label"
             android:layout_width="wrap_content"
             android:text="Starman Tesla Roadster"
+            android:textColor="#95bfdf"
+            android:textSize="14sp"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/textview_popculture_spacecraft"
             android:layout_width="wrap_content"
+            android:textSize="14sp"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -41,12 +55,14 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textview_popculture_propulsion_label"
             android:layout_width="wrap_content"
             android:text="Liquid-fuel"
+            android:textColor="#95bfdf"
             android:layout_height="wrap_content"/>
 
         <TextView
@@ -60,40 +76,61 @@
         android:id="@+id/imageview_popculture_image"
         android:src="@drawable/tesla"
         android:scaleType="fitCenter"
+        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="200dp"/>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="24dp"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textview_popculture_synopsis_label"
             android:layout_width="wrap_content"
-            android:text="SpaceX launched Elon Musk's Tesla Roadster car as a payload on a Falcon Heavy liquid-fuel rocket."
+            android:text="Synopsis: "
+            android:textAllCaps="true"
+            android:textColor="#95bfdf"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:text="SpaceX launched Elon Musk's Tesla Roadster car as a payload on a Falcon Heavy liquid-fuel rocket."
             android:id="@+id/textview_popculture_synopsis"
             android:layout_width="wrap_content"
+            android:textColor="#95bfdf"
+            android:textSize="14sp"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="24dp"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textview_popculture_fact_label"
             android:layout_width="wrap_content"
-            android:text="Potential concept to store antimatter is to levitate it in a vacuum."
+            android:text="Fact: "
+            android:textAllCaps="true"
+            android:textColor="#95bfdf"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/textview_popculture_fact"
+            android:text="Potential concept to store antimatter is to levitate it in a vacuum."
+            android:textColor="#95bfdf"
+            android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
