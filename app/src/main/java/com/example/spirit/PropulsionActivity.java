@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.spirit.objects.Propulsion;
+
 public class PropulsionActivity extends AppCompatActivity {
+
+    Propulsion propulsion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +22,9 @@ public class PropulsionActivity extends AppCompatActivity {
         setupBackButton();
 
         Intent intent = getIntent();
+        propulsion = (Propulsion) intent.getSerializableExtra("propulsion");
         TextView propulsionTextView = findViewById(R.id.textview_propulsion_title);
-        propulsionTextView.setText(intent.getStringExtra("prop_name"));
+        propulsionTextView.setText(propulsion.getName());
 
         setUpDetailsButton();
         setUpJourneyButton();
@@ -43,6 +48,7 @@ public class PropulsionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PropulsionActivity.this, DetailsActivity.class);
+                intent.putExtra("propulsion", propulsion);
                 startActivity(intent);
             }
         });
@@ -54,6 +60,7 @@ public class PropulsionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PropulsionActivity.this, JourneyActivity.class);
+                intent.putExtra("propulsion", propulsion);
                 startActivity(intent);
             }
         });

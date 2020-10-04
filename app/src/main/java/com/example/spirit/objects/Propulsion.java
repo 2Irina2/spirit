@@ -31,6 +31,24 @@ public class Propulsion implements Serializable {
     private String risks;
     private String picture;
 
+    public Propulsion(String name, double exhaustVelocity, double structuralRatio, double payloadRatio, double massRatio, double travelVelocity, double maxVelocity, String inventor, String year, String energySource, String description, String status, String highlights, String risks, String picture){
+        this.name = name;
+        this.exhaustVelocity = exhaustVelocity;
+        this.structuralRatio = structuralRatio;
+        this.payloadRatio = payloadRatio;
+        this.massRatio = massRatio;
+        this.travelVelocity = travelVelocity;
+        this.maxVelocity = maxVelocity;
+        this.inventor = inventor;
+        this.year = year;
+        this.energySource =  energySource;
+        this.description = description;
+        this.status = status;
+        this.highlights = highlights;
+        this.risks = risks;
+        this.picture = picture;
+    }
+
     public String getName() {
         return name;
     }
