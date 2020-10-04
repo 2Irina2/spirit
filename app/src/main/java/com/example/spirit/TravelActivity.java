@@ -18,7 +18,10 @@ import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
+import com.example.spirit.objects.Propulsion;
 import com.example.spirit.utils.NotificationService;
+
+import java.util.Date;
 
 import static android.Manifest.permission.FOREGROUND_SERVICE;
 
@@ -30,10 +33,16 @@ public class TravelActivity extends AppCompatActivity {
     TextView minutesView;
     TextView secondsView;
 
+    Propulsion propulsion;
+    String planetName;
+    int planetYear;
+    double distanceKm;
+    long travelTime;
+
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Integer integerTime = intent.getIntExtra("TimeRemaining", 0);
+            Long integerTime = intent.getLongExtra("TimeRemaining", 0);
             if (!DONE) {
                 secondsView.setText(String.format("%02d", integerTime % 60));
                 minutesView.setText(String.format("%02d:", integerTime / 60));
@@ -60,9 +69,17 @@ public class TravelActivity extends AppCompatActivity {
                 .transition(GenericTransitionOptions.with(R.anim.shake))
                 .into(imageView);
 
+        Intent intent = getIntent();
+        propulsion = (Propulsion) intent.getSerializableExtra("propulsion");
+        planetName = intent.getStringExtra("planet_name");
+        planetYear = intent.getIntExtra("planet_year", -1);
+        distanceKm = intent.getDoubleExtra("distance", -1);
+        travelTime = intent.getLongExtra("travel_time", -1);
+        long appTravelTime = intent.getLongExtra("app_time", -1);
+
         if (!DONE) {
 
-            startCountdownService(0, 10);
+            startCountdownService(appTravelTime);
         }
     }
 
@@ -78,7 +95,7 @@ public class TravelActivity extends AppCompatActivity {
 
     private void displayAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(TravelActivity.this);
-        builder.setTitle("Your " + "PROPULSION TYPE" + "spacecraft has arrived at: ")
+        builder.setTitle("Your " + propulsion.getName() + "spacecraft has arrived at: ")
                 .setView(R.layout.travel_dialog)
                 .setPositiveButton(R.string.travel_dialog_yes, (dialog, which) -> {
                     Intent intent = new Intent(TravelActivity.this, JourneyActivity.class);
@@ -92,16 +109,16 @@ public class TravelActivity extends AppCompatActivity {
         dialog.show();
 
         TextView exoplanetTextView = dialog.findViewById(R.id.textview_travel_dialog_exoplanet);
-        exoplanetTextView.setText("PLANET NAME");
+        exoplanetTextView.setText(planetName);
         TextView yearTextView = dialog.findViewById(R.id.textview_travel_dialog_year);
-        yearTextView.setText("YEAR");
+        yearTextView.setText(String.valueOf(planetYear));
         TextView distanceTextView = dialog.findViewById(R.id.textview_travel_dialog_distance);
-        distanceTextView.setText("DISTANCE");
+        distanceTextView.setText(String.valueOf(distanceKm) + " kms");
         TextView timeTextView = dialog.findViewById(R.id.textview_travel_dialog_time);
-        timeTextView.setText("TIME");
+        timeTextView.setText(convertSecondsToDays(travelTime));
     }
 
-    private void startCountdownService(int minutes, int seconds) {
+    private void startCountdownService(long seconds) {
         ActivityCompat.requestPermissions(this, new String[]{FOREGROUND_SERVICE}, PackageManager.PERMISSION_GRANTED);
 
         IntentFilter intentFilter = new IntentFilter();
@@ -109,8 +126,14 @@ public class TravelActivity extends AppCompatActivity {
         registerReceiver(broadcastReceiver, intentFilter);
 
         intentService = new Intent(this, NotificationService.class);
-        Integer integerTimeSet = minutes * 60 + seconds;
+        Long integerTimeSet = seconds;
         intentService.putExtra("TimeValue", integerTimeSet);
         startService(intentService);
+    }
+
+    private String convertSecondsToDays(long totalSecs){
+        Date d = new Date(totalSecs);
+
+        return String.format("%d years, %d months, %d days, %02d hours, %02d minutes, %02d seconds", d.getYear(), d.getMonth(), d.getDay(), d.getHours(), d.getMinutes(), d.getSeconds());
     }
 }

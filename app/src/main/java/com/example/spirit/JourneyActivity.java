@@ -44,6 +44,10 @@ public class JourneyActivity extends AppCompatActivity {
     private boolean observed = false;
     private Propulsion propulsion;
 
+    double distanceKm;
+    long totalSecs;
+    long appTravelTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,11 +117,20 @@ public class JourneyActivity extends AppCompatActivity {
 
     public void displayJourneyDetails(PlanetNode node) {
         Planet planet = node.getPlanet();
+        totalSecs = calculateRealTravelTime(planet);
+        appTravelTime = calculateAppTravelTime(totalSecs);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(JourneyActivity.this);
         builder.setTitle(R.string.journey_dialog_title)
                 .setView(R.layout.journey_dialog)
                 .setPositiveButton(R.string.journey_dialog_yes, (dialog, which) -> {
                     Intent intent = new Intent(JourneyActivity.this, TravelActivity.class);
+                    intent.putExtra("propulsion", propulsion);
+                    intent.putExtra("planet_name", planet.getName());
+                    intent.putExtra("planet_year", planet.getYear());
+                    intent.putExtra("distance", distanceKm);
+                    intent.putExtra("travel_time", totalSecs);
+                    intent.putExtra("app_time", appTravelTime);
                     Toast.makeText(JourneyActivity.this, R.string.journey_dialog_toast, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 })
@@ -125,7 +138,6 @@ public class JourneyActivity extends AppCompatActivity {
 
         Dialog dialog = builder.create();
         dialog.show();
-
         TextView propulsionType = dialog.findViewById(R.id.textview_journey_dialog_propulsion_type);
         propulsionType.setText(propulsion.getName());
         TextView destination = dialog.findViewById(R.id.textview_journey_dialog_destination);
@@ -133,16 +145,14 @@ public class JourneyActivity extends AppCompatActivity {
         TextView length = dialog.findViewById(R.id.textview_journey_dialog_length);
         length.setText(planet.getDistance() + " parsecs");
         TextView realTime = dialog.findViewById(R.id.textview_journey_dialog_real_time);
-        long totalSecs = calculateRealTravelTime(planet);
         realTime.setText(convertSecondsToDays(totalSecs));
         TextView appTime = dialog.findViewById(R.id.textview_journey_dialog_app_time);
-        long appTravelTime = calculateAppTravelTime(totalSecs);
         appTime.setText(String.valueOf(appTravelTime) + " seconds");
     }
 
     private long calculateRealTravelTime(Planet planet){
         float distancePc = planet.getDistance();
-        double distanceKm = Utils.round(distancePc * 3.086E13);
+        distanceKm = Utils.round(distancePc * 3.086E13);
         double speed = propulsion.getTravelVelocity();
 
         double timeSeconds = distanceKm/speed;

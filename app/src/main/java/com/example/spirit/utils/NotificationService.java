@@ -30,7 +30,7 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        final Integer[] timeRemaining = {intent.getIntExtra("TimeValue", 0)};
+        final Long[] timeRemaining = {intent.getLongExtra("TimeValue", 0)};
         final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -49,7 +49,7 @@ public class NotificationService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    public void NotificationUpdate(Integer timeLeft){
+    public void NotificationUpdate(Long timeLeft){
         try {
             Intent notificationIntent = new Intent(this, TravelActivity.class);
             notificationIntent.putExtra("notif", true);
@@ -57,7 +57,7 @@ public class NotificationService extends Service {
             Notification[] notification = {new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setContentTitle(getResources().getString(R.string.travel_notification_title) + "PLANET NAME")
                     .setContentText(getResources().getString(R.string.travel_notification_content))
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setSmallIcon(R.drawable.app_icon_color)
                     .setContentIntent(pendingIntent)
                     .build()};
             startForeground(1, notification[0]);
