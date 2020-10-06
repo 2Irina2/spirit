@@ -49,11 +49,6 @@ public class TravelActivity extends AppCompatActivity {
             }
             if (integerTime == 0) {
                 DONE = true;
-                propulsion = (Propulsion) intent.getSerializableExtra("propulsion");
-                planetName = intent.getStringExtra("planet_name");
-                planetYear = intent.getIntExtra("planet_year", -1);
-                distanceKm = intent.getDoubleExtra("distance", -1);
-                travelTime = intent.getLongExtra("travel_time", -1);
                 displayAlertDialog();
             }
         }
@@ -100,8 +95,8 @@ public class TravelActivity extends AppCompatActivity {
 
     private void displayAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(TravelActivity.this, R.style.AlertDialog);
-        builder.setTitle("Your " + propulsion.getName() + " spacecraft has arrived at: ")
-                .setView(R.layout.travel_dialog)
+        builder.setTitle("Your spacecraft has arrived at the destination")
+                //.setView(R.layout.travel_dialog)
                 .setPositiveButton(R.string.travel_dialog_yes, (dialog, which) -> {
                     Intent intent = new Intent(TravelActivity.this, JourneyActivity.class);
                     startActivity(intent);
@@ -112,15 +107,6 @@ public class TravelActivity extends AppCompatActivity {
                 });
         Dialog dialog = builder.create();
         dialog.show();
-
-        TextView exoplanetTextView = dialog.findViewById(R.id.textview_travel_dialog_exoplanet);
-        exoplanetTextView.setText(planetName);
-        TextView yearTextView = dialog.findViewById(R.id.textview_travel_dialog_year);
-        yearTextView.setText(String.valueOf(planetYear));
-        TextView distanceTextView = dialog.findViewById(R.id.textview_travel_dialog_distance);
-        distanceTextView.setText(String.valueOf(distanceKm) + " kms");
-        TextView timeTextView = dialog.findViewById(R.id.textview_travel_dialog_time);
-        timeTextView.setText(convertSecondsToDays(travelTime));
     }
 
     private void startCountdownService(long seconds) {

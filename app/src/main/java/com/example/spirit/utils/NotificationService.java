@@ -12,23 +12,14 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.example.spirit.MainActivity;
 import com.example.spirit.R;
 import com.example.spirit.TravelActivity;
-import com.example.spirit.objects.Propulsion;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class NotificationService extends Service {
     private static final String CHANNEL_ID = "NotificationChannelID";
-
-    Propulsion propulsion;
-    String planetName;
-    int planetYear;
-    double distanceKm;
-    long travelTime;
-
 
     @Nullable
     @Override
@@ -39,11 +30,6 @@ public class NotificationService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         final Long[] timeRemaining = {intent.getLongExtra("TimeValue", 0)};
-        propulsion = (Propulsion) intent.getSerializableExtra("propulsion");
-        planetName = intent.getStringExtra("planet_name");
-        planetYear = intent.getIntExtra("planet_year", -1);
-        distanceKm = intent.getDoubleExtra("distance", -1);
-        travelTime = intent.getLongExtra("travel_time", -1);
         final Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -51,31 +37,23 @@ public class NotificationService extends Service {
                 Intent intent1local = new Intent();
                 intent1local.setAction("Counter");
                 timeRemaining[0]--;
-                if (timeRemaining[0] <= 0){
+                if (timeRemaining[0] <= 0) {
                     NotificationUpdate(timeRemaining[0]);
                     timer.cancel();
                 }
                 intent1local.putExtra("TimeRemaining", timeRemaining[0]);
-
-                if(timeRemaining[0] == 0){
-                    intent1local.putExtra("propulsion", propulsion);
-                    intent1local.putExtra("planet_name", planetName);
-                    intent1local.putExtra("planet_year", planetYear);
-                    intent1local.putExtra("distance", distanceKm);
-                    intent1local.putExtra("travel_time", travelTime);
-                }
                 sendBroadcast(intent1local);
             }
-        }, 0,1000);
+        }, 0, 1000);
         return super.onStartCommand(intent, flags, startId);
     }
 
-    public void NotificationUpdate(Long timeLeft){
+    public void NotificationUpdate(Long timeLeft) {
         try {
             Intent notificationIntent = new Intent(this, TravelActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
             Notification[] notification = {new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setContentTitle(getResources().getString(R.string.travel_notification_title) )
+                    .setContentTitle(getResources().getString(R.string.travel_notification_title))
                     .setContentText(getResources().getString(R.string.travel_notification_content))
                     .setSmallIcon(R.drawable.app_icon_color)
                     .setContentIntent(pendingIntent)
@@ -92,8 +70,7 @@ public class NotificationService extends Service {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 notificationManager.createNotificationChannel(notificationChannel);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
